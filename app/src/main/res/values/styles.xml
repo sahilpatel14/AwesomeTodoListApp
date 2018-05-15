@@ -1,0 +1,106 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="TabTextAppearanceStyle" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TabLayoutStyle" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@color/colorPrimary</item>
+        <item name="tabIndicatorColor">@color/tabSelectedColour</item>
+        <item name="tabSelectedTextColor">@color/tabSelectedColour</item>
+        <item name="tabTextColor">@color/tabTextColour</item>
+    </style>
+
+
+
+    <style name="TaskTitleStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/task_title_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/textColour</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="TaskDescriptionStyle">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/task_description_text_size</item>
+        <item name="android:textColor">@color/subtextColour</item>
+        <item name="android:gravity">start</item>
+    </style>
+
+    <style name="TaskDeadlineStyle">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/task_deadline_text_size</item>
+        <item name="android:textColor">@color/subtextColour</item>
+    </style>
+
+
+    <style name="TaskFieldStyle">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:drawablePadding">@dimen/default_margin</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="AddTaskHeaderStyle">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:paddingLeft">@dimen/larger_margin</item>
+        <item name="android:paddingRight">@dimen/larger_margin</item>
+        <item name="android:textSize">@dimen/add_task_head_text_size</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/add_task_header_height</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:text">@string/new_task</item>
+    </style>
+
+    <style name="AddTaskDivider">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/add_task_divider_height</item>
+    </style>
+
+    <style name="AddTaskFooterStyle">
+        <item name="android:background">@android:color/white</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/add_task_footer_height</item>
+    </style>
+
+    <style name="AddTaskButton">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:text">@string/save</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginRight">@dimen/larger_margin</item>
+    </style>
+
+</resources>

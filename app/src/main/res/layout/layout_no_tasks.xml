@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/rl_list_empty"
+    android:gravity="center"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+        <ImageView
+            android:contentDescription="@string/fancy_bulb"
+            app:srcCompat="@drawable/ic_tag_faces_blue_24dp"
+            android:layout_width="@dimen/no_tasks_bulb_size"
+            android:layout_height="@dimen/no_tasks_bulb_size" />
+
+        <TextView
+            android:fontFamily="@font/roboto_regular"
+            android:textSize="@dimen/text_12"
+            android:layout_marginRight="@dimen/margin_24"
+            android:layout_marginLeft="@dimen/margin_24"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/margin_32"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/active_list_empty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+
+</LinearLayout>

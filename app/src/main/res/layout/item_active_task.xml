@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="@dimen/task_item_min_height"
+    android:padding="@dimen/default_margin">
+
+
+    <ImageView
+        android:id="@+id/iv_indicator_active"
+        android:layout_width="@dimen/task_state_icon_size"
+        android:layout_height="48dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/cd"
+        tools:srcCompat="@drawable/ic_grey_alarm_circle"
+        />
+
+    <TextView
+        android:id="@+id/tv_deadline"
+        style="@style/TaskDeadlineStyle"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="@dimen/larger_margin"
+        android:layout_marginRight="@dimen/larger_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        tools:text="14 Oct" />
+
+    <LinearLayout
+        android:id="@+id/ll_task_text_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_marginLeft="@dimen/larger_margin"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginStart="@dimen/larger_margin"
+        android:layout_toEndOf="@id/iv_indicator_active"
+        android:layout_toLeftOf="@id/tv_deadline"
+        android:layout_toRightOf="@id/iv_indicator_active"
+        android:layout_toStartOf="@id/tv_deadline"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_task_title"
+            style="@style/TaskTitleStyle"
+            tools:text="Adam Gray" />
+
+        <TextView
+            android:id="@+id/tv_task_description"
+            style="@style/TaskDescriptionStyle"
+            android:layout_marginTop="@dimen/small_margin"
+            android:text="@string/sample_message" />
+
+    </LinearLayout>
+
+</RelativeLayout>

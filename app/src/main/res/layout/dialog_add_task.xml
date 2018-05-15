@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@android:color/white"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ProgressBar
+        android:visibility="gone"
+        android:id="@+id/add_task_progress_bar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        style="@style/AddTaskHeaderStyle" />
+
+    <View
+        android:id="@+id/add_task_header_divider"
+        style="@style/AddTaskDivider"
+        android:layout_marginTop="@dimen/add_task_header_height" />
+
+    <LinearLayout
+        android:id="@+id/fields_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/add_task_header_divider"
+        android:orientation="vertical"
+        android:padding="@dimen/larger_margin">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:inputType="textAutoComplete"
+            android:imeOptions="actionDone"
+            android:id="@+id/et_add_task_title"
+            style="@style/TaskFieldStyle"
+            android:hint="@string/hint_title" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:focusable="false"
+            android:inputType="none"
+            android:editable="false"
+            android:id="@+id/et_add_task_deadline"
+            style="@style/TaskFieldStyle"
+            android:layout_marginTop="@dimen/default_margin"
+            android:hint="@string/hint_deadline" />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_add_task_description"
+            style="@style/TaskFieldStyle"
+            android:layout_height="@dimen/task_description_field_height"
+            android:layout_marginTop="@dimen/default_margin"
+            android:gravity="top"
+            android:hint="@string/hint_description" />
+
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        style="@style/AddTaskFooterStyle"
+        android:layout_below="@id/fields_container">
+
+        <View
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/add_task_divider_height"
+            android:background="@color/hintColour" />
+
+
+        <Button
+            android:id="@+id/btn_add_task_save"
+            style="@style/AddTaskButton"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true" />
+
+
+        <TextView
+            android:background="@null"
+            android:id="@+id/btn_add_task_cancel"
+            style="@style/AddTaskButton"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@id/btn_add_task_save"
+            android:layout_toStartOf="@id/btn_add_task_save"
+            android:padding="@dimen/default_margin"
+            android:text="@string/cancel"
+            android:textColor="@color/colorPrimary" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
