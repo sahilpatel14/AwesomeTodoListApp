@@ -38,4 +38,5 @@ similar to [googles mvp sample app](https://github.com/googlesamples/android-arc
 
 ## Testing
 
+We have testing the app on APK 27, APK 22 and APK 16 (Emulators).
 We haven't written any tests yet. But unit tests and UI testing is in our pipeline for next version of the app.
