@@ -1,4 +1,6 @@
 package com.example.awesometodolistapp.data.models;
+import android.support.annotation.NonNull;
+
 import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
 import java.util.Date;
 
@@ -29,7 +31,7 @@ public final class Task {
      * task object (TaskEntity) into Task object. This happens in the
      * create static method.
      */
-    public static Task create(TaskEntity eTask) {
+    public static Task create(@NonNull TaskEntity eTask) {
         Task task = new Task(eTask.getTaskId(), eTask.getTaskTitle(), eTask.getTaskStatus());
         task.mTaskDescription = eTask.getTaskDescription();
         task.mCreatedAt = new Date(eTask.getCreatedAt());

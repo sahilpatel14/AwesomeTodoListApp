@@ -8,7 +8,7 @@ import com.example.awesometodolistapp.data.models.Task;
  * Created by sahil-mac on 14/05/18.
  */
 
-interface AddTaskContract {
+public interface AddTaskContract {
 
     interface View extends BaseView<Presenter> {
 

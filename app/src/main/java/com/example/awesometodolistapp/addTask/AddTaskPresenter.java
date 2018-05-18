@@ -21,7 +21,7 @@ import static com.example.awesometodolistapp.addTask.AddTaskContract.View.Valida
  * Created by sahil-mac on 14/05/18.
  */
 
-class AddTaskPresenter implements AddTaskContract.Presenter {
+public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     private static final String TAG = "AddTaskPresenter";
 
@@ -37,7 +37,7 @@ class AddTaskPresenter implements AddTaskContract.Presenter {
     @NonNull
     private final NotificationManager mNotificationManager;
 
-    AddTaskPresenter(@NonNull TaskRepository taskRepository,
+    public AddTaskPresenter(@NonNull TaskRepository taskRepository,
                             @NonNull NotificationManager notificationManager,
                             @NonNull AddTaskContract.View view) {
         this.mTaskRepository = taskRepository;
