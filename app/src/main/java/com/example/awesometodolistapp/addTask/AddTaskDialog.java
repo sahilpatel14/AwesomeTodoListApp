@@ -19,9 +19,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.awesometodolistapp.Injection;
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.common.Constants;
+import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.common.Utils;
 import com.example.awesometodolistapp.data.models.Task;
 

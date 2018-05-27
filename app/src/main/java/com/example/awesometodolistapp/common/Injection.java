@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp;
+package com.example.awesometodolistapp.common;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

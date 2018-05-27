@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.example.awesometodolistapp.Injection;
+import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.data.models.Task;
 import com.example.awesometodolistapp.data.repositories.TaskRepository;
 

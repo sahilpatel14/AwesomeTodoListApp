@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
-import com.example.awesometodolistapp.Injection;
 import com.example.awesometodolistapp.R;
+import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.common.Utils;
 import com.example.awesometodolistapp.data.repositories.TaskRepository;
 import com.example.awesometodolistapp.home.HomeActivity;
