@@ -23,7 +23,7 @@ import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.common.Constants;
 import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.common.Utils;
-import com.example.awesometodolistapp.data.models.Task;
+import com.example.data.models.Task;
 
 import java.util.Calendar;
 import java.util.Date;

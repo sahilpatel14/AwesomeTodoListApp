@@ -3,8 +3,9 @@ package com.example.awesometodolistapp.home.activeTasks;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.repositories.TaskRepository;
+
+import com.example.data.models.Task;
+import com.example.data.repositories.TaskRepository;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-import static com.example.awesometodolistapp.data.common.DataConstants.STATE_COMPLETED;
+import static com.example.data.common.DataConstants.STATE_COMPLETED;
+
 
 /**
  * Created by sahil-mac on 13/05/18.

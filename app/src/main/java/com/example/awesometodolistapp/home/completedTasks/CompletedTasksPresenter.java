@@ -3,8 +3,9 @@ package com.example.awesometodolistapp.home.completedTasks;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.repositories.TaskRepository;
+
+import com.example.data.models.Task;
+import com.example.data.repositories.TaskRepository;
 
 import java.util.List;
 

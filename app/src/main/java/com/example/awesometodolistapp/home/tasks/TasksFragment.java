@@ -18,8 +18,8 @@ import android.widget.ProgressBar;
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.common.Utils;
-import com.example.awesometodolistapp.data.repositories.TaskRepository;
 import com.example.awesometodolistapp.home.HomeActivity;
+import com.example.data.repositories.TaskRepository;
 
 /**
  * Created by sahil-mac on 15/05/18.

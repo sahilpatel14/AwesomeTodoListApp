@@ -2,7 +2,7 @@ package com.example.awesometodolistapp.addTask;
 
 import com.example.awesometodolistapp.common.BasePresenter;
 import com.example.awesometodolistapp.common.BaseView;
-import com.example.awesometodolistapp.data.models.Task;
+import com.example.data.models.Task;
 
 /**
  * Created by sahil-mac on 14/05/18.

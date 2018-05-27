@@ -14,8 +14,8 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
 import com.example.awesometodolistapp.R;
-import com.example.awesometodolistapp.data.models.Task;
 import com.example.awesometodolistapp.home.HomeActivity;
+import com.example.data.models.Task;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.data.common;
+package com.example.data.common;
 
 /**
  * Created by sahil-mac on 13/05/18.

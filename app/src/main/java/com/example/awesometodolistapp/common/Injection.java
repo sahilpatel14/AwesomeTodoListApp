@@ -3,10 +3,11 @@ package com.example.awesometodolistapp.common;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
-import com.example.awesometodolistapp.data.repositories.TaskRepository;
-import com.example.awesometodolistapp.data.sources.TaskDataSource;
-import com.example.awesometodolistapp.data.sources.local.database.RoomTaskDataSource;
+
 import com.example.awesometodolistapp.notifications.NotificationManager;
+import com.example.data.repositories.TaskRepository;
+import com.example.data.sources.TaskDataSource;
+import com.example.db.RoomTaskDataSource;
 
 /**
  * Created by sahil-mac on 13/05/18.

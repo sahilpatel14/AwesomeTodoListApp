@@ -1,11 +1,13 @@
-package com.example.awesometodolistapp.data.sources.local.database.entities;
+package com.example.db.entities;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-import com.example.awesometodolistapp.data.models.Task;
+import com.example.data.models.Task;
+
+import java.util.Date;
 
 /**
  * Created by sahil-mac on 12/05/18.
@@ -76,6 +78,21 @@ public class TaskEntity {
                 task.getTaskDeadline().getTime() :
                 null;
         return taskEntity;
+    }
+
+    /**
+     * While fetching data from roomDS, we need to convert room specific
+     * task object (TaskEntity) into Task object. This happens in the
+     * create static method.
+     */
+    public static Task create(@NonNull TaskEntity eTask) {
+        Task task = new Task(eTask.getTaskId(), eTask.getTaskTitle(), eTask.getTaskStatus());
+        task.setTaskDescription(eTask.getTaskDescription());
+        task.setCreatedAt(new Date(eTask.getCreatedAt()));
+        task.setTaskDeadline(eTask.getTaskDeadline() != null ?
+                new Date(eTask.getTaskDeadline()) :
+                null);
+        return task;
     }
 
     public String getTaskId() {

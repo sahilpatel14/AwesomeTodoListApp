@@ -11,9 +11,9 @@ import android.view.View;
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.addTask.AddTaskDialog;
 import com.example.awesometodolistapp.common.Constants;
-import com.example.awesometodolistapp.data.models.Task;
 import com.example.awesometodolistapp.home.tasks.ScreenType;
 import com.example.awesometodolistapp.home.tasks.TasksFragment;
+import com.example.data.models.Task;
 
 import java.util.List;
 

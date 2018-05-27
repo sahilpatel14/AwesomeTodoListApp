@@ -1,12 +1,13 @@
-package com.example.awesometodolistapp.data.sources.local.database;
+package com.example.db;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import com.example.awesometodolistapp.data.sources.local.database.dao.TaskDao;
-import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
+import com.example.db.dao.TaskDao;
+import com.example.db.entities.TaskEntity;
+
 
 /**
  * Created by sahil-mac on 12/05/18.

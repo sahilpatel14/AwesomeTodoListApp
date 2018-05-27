@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.awesometodolistapp.common.Utils;
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.repositories.TaskRepository;
 import com.example.awesometodolistapp.notifications.NotificationManager;
+import com.example.data.models.Task;
+import com.example.data.repositories.TaskRepository;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;

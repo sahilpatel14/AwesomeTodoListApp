@@ -1,7 +1,8 @@
-package com.example.awesometodolistapp.data.sources;
+package com.example.data.sources;
 
 
-import com.example.awesometodolistapp.data.models.Task;
+
+import com.example.data.models.Task;
 
 import java.util.List;
 

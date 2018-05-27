@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.data.sources.local.database.dao;
+package com.example.db.dao;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -7,10 +7,10 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
+
+import com.example.db.entities.TaskEntity;
 
 import java.util.List;
-
 import io.reactivex.Flowable;
 
 /**

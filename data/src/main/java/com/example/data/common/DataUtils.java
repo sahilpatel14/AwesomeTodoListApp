@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.data.common;
+package com.example.data.common;
 
 import java.util.Date;
 import java.util.UUID;

@@ -8,7 +8,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 
-import com.example.awesometodolistapp.data.models.Task;
+
+import com.example.data.models.Task;
 
 import java.util.Date;
 

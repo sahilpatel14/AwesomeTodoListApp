@@ -1,12 +1,13 @@
 package com.example.awesometodolistapp.common;
 
-import com.example.awesometodolistapp.data.common.DataConstants;
+
+import com.example.data.common.DataConstants;
 
 /**
  * Created by sahil-mac on 14/05/18.
  */
 
-public interface Constants extends DataConstants{
+public interface Constants extends DataConstants {
 
     //  Constants for defining time format which is shown in
     //  add task screen

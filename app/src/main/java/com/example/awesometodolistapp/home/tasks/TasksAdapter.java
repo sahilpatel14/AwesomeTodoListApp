@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.common.Utils;
-import com.example.awesometodolistapp.data.models.Task;
+import com.example.data.models.Task;
 
 import java.util.ArrayList;
 import java.util.Date;

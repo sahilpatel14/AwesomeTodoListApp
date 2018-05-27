@@ -1,12 +1,13 @@
-package com.example.awesometodolistapp.data.sources.local.database;
+package com.example.db;
 
 import android.content.Context;
 
-import com.example.awesometodolistapp.data.common.DataConstants;
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.sources.TaskDataSource;
-import com.example.awesometodolistapp.data.sources.local.database.dao.TaskDao;
-import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
+
+import com.example.data.common.DataConstants;
+import com.example.data.models.Task;
+import com.example.data.sources.TaskDataSource;
+import com.example.db.dao.TaskDao;
+import com.example.db.entities.TaskEntity;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class RoomTaskDataSource implements TaskDataSource, DataConstants {
         return mTaskDao.getAllTasks(STATE_ACTIVE)
                 .flatMapSingle(task->
                     Observable.fromIterable(task)
-                        .map(Task::create)
+                        .map(TaskEntity::create)
                         .toList()
                 );
     }
@@ -63,7 +64,7 @@ public class RoomTaskDataSource implements TaskDataSource, DataConstants {
                 .observeOn(Schedulers.computation())
                 .flatMapSingle(task->
                         Observable.fromIterable(task)
-                                .map(Task::create)
+                                .map(TaskEntity::create)
                                 .toList()
                 );
     }

@@ -19,8 +19,6 @@ import android.view.ViewParent;
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.addTask.AddTaskDialog;
 import com.example.awesometodolistapp.common.Constants;
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.sources.local.database.RoomTaskDataSource;
 import com.example.awesometodolistapp.home.activeTasks.ActiveTasksFragment;
 import com.example.awesometodolistapp.home.completedTasks.CompletedTasksFragment;
 import com.example.awesometodolistapp.home.tasks.TasksFragment;

@@ -1,14 +1,16 @@
-package com.example.awesometodolistapp.data.repositories;
+package com.example.data.repositories;
 
-import android.support.annotation.NonNull;
 
-import com.example.awesometodolistapp.data.models.Task;
-import com.example.awesometodolistapp.data.sources.TaskDataSource;
+
+
+import com.example.data.models.Task;
+import com.example.data.sources.TaskDataSource;
 
 import java.util.List;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.annotations.NonNull;
 
 /**
  * Created by sahil-mac on 13/05/18.

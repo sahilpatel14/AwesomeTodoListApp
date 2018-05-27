@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.awesometodolistapp.common.BasePresenter;
 import com.example.awesometodolistapp.common.BaseView;
-import com.example.awesometodolistapp.data.models.Task;
+import com.example.data.models.Task;
 
 import java.util.List;
 
