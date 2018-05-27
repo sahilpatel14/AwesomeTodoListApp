@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.notifications;
+package com.ninthsemester.notifications;
 
 import android.app.Notification;
 import android.content.BroadcastReceiver;

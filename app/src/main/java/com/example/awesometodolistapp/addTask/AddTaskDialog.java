@@ -3,6 +3,7 @@ package com.example.awesometodolistapp.addTask;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,7 +24,9 @@ import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.common.Constants;
 import com.example.awesometodolistapp.common.Injection;
 import com.example.awesometodolistapp.common.Utils;
+import com.example.awesometodolistapp.home.HomeActivity;
 import com.example.data.models.Task;
+import com.ninthsemester.notifications.NotificationManager;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -59,9 +62,11 @@ public class AddTaskDialog extends DialogFragment
             throw new IllegalStateException("getContext() is null. It shouldn't be null.");
         }
 
+        NotificationManager notificationManager = Injection.getNotificationManager(getContext());
+        notificationManager.setOpeningIntent(new Intent(getContext(), HomeActivity.class));
         mPresenter = new AddTaskPresenter(
                 Injection.getTaskRepository(getContext()),
-                Injection.getNotificationManager(getContext()),
+                notificationManager,
                 this);
 
         return rootView;

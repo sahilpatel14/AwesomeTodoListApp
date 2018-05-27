@@ -1,6 +1,5 @@
-package com.example.awesometodolistapp.notifications;
+package com.ninthsemester.notifications;
 
-import android.annotation.SuppressLint;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,14 +7,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 
-import com.example.awesometodolistapp.R;
-import com.example.awesometodolistapp.home.HomeActivity;
 import com.example.data.models.Task;
+
+import io.reactivex.annotations.NonNull;
 
 
 /**
@@ -60,7 +58,7 @@ final class NotificationUtils implements NotificationInfo{
      * Uses the app name as title and task title as content. When the user clicks on
      * the notification, it opens HomeActivity.
      */
-    static Notification createNotification(Context context, Task task) {
+    static Notification createNotification(Context context, Task task, Intent intent) {
         final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_stat_check)
                 .setContentTitle(context.getString(R.string.app_name))
@@ -73,7 +71,6 @@ final class NotificationUtils implements NotificationInfo{
         }
 
         //  Creating a pending intent. Will be triggered when user clicks the notification
-        Intent intent = new Intent(context, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
 

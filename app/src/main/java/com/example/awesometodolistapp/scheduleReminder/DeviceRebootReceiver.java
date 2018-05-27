@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.notifications;
+package com.example.awesometodolistapp.scheduleReminder;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.example.awesometodolistapp.common.Injection;
+import com.example.awesometodolistapp.home.HomeActivity;
 import com.example.data.models.Task;
 import com.example.data.repositories.TaskRepository;
+import com.ninthsemester.notifications.NotificationManager;
 
 import java.util.List;
 
@@ -47,6 +49,7 @@ public class DeviceRebootReceiver extends BroadcastReceiver {
             //  notification manager for scheduling notification from the injector
             mRepository = Injection.getTaskRepository(context);
             mNotificationManager = Injection.getNotificationManager(context);
+            mNotificationManager.setOpeningIntent(new Intent(context, HomeActivity.class));
             rescheduleActiveTasks();
         }
 

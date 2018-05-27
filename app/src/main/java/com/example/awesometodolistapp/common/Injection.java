@@ -4,10 +4,10 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 
-import com.example.awesometodolistapp.notifications.NotificationManager;
 import com.example.data.repositories.TaskRepository;
 import com.example.data.sources.TaskDataSource;
 import com.example.db.RoomTaskDataSource;
+import com.ninthsemester.notifications.NotificationManager;
 
 /**
  * Created by sahil-mac on 13/05/18.

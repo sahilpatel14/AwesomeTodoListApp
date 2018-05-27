@@ -1,7 +1,4 @@
-package com.example.awesometodolistapp.notifications;
-
-import android.content.Context;
-import android.content.Intent;
+package com.ninthsemester.notifications;
 
 /**
  * Created by sahil-mac on 14/05/18.

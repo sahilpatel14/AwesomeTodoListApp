@@ -37,6 +37,7 @@ dependencies {
 
     implementation project(':data')
     implementation project(':db')
+    implementation project(':notifications')
 
     implementation 'com.android.support:appcompat-v7:27.1.1'
     implementation 'com.android.support:design:27.1.1'

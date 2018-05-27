@@ -22,12 +22,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".notifications.NotificationPublisher">
-            <intent-filter>
-                <action android:name="android.intent.action.NOTIFY" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".notifications.DeviceRebootReceiver">
+        <receiver android:name=".scheduleReminder.DeviceRebootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>

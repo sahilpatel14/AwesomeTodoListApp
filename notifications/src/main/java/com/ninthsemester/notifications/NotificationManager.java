@@ -1,4 +1,4 @@
-package com.example.awesometodolistapp.notifications;
+package com.ninthsemester.notifications;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
-
 
 import com.example.data.models.Task;
 
@@ -36,6 +35,11 @@ public class NotificationManager implements NotificationInfo{
         this.mContext = context;
     }
 
+    private Intent openingIntent;
+
+    public void setOpeningIntent(Intent openingIntent) {
+        this.openingIntent = openingIntent;
+    }
 
     /**
      * Schedules a notification to be triggered when its deadline.
@@ -52,7 +56,7 @@ public class NotificationManager implements NotificationInfo{
         long deadlineInMs = task.getTaskDeadline().getTime();
 
         //  Creating a notification based on the task
-        Notification notification = NotificationUtils.createNotification(mContext, task);
+        Notification notification = NotificationUtils.createNotification(mContext, task, openingIntent);
 
         //  Creating an intent to open NotificationPublisher receiver class.
         Intent notificationIntent = new Intent(mContext, NotificationPublisher.class);

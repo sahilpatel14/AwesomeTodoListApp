@@ -1,12 +1,13 @@
 package com.example.awesometodolistapp.addTask;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.awesometodolistapp.common.Utils;
-import com.example.awesometodolistapp.notifications.NotificationManager;
 import com.example.data.models.Task;
 import com.example.data.repositories.TaskRepository;
+import com.ninthsemester.notifications.NotificationManager;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,6 +37,7 @@ public class AddTaskPresenter implements AddTaskContract.Presenter {
 
     @NonNull
     private final NotificationManager mNotificationManager;
+
 
     public AddTaskPresenter(@NonNull TaskRepository taskRepository,
                             @NonNull NotificationManager notificationManager,
