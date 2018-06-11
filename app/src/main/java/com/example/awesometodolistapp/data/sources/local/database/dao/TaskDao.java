@@ -10,8 +10,10 @@ import android.arch.persistence.room.Update;
 import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
 
 import java.util.List;
+import java.util.Optional;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
 
 /**
  * Created by sahil-mac on 12/05/18.
@@ -27,7 +29,7 @@ import io.reactivex.Flowable;
 @Dao
 public interface TaskDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert()
     long insertTask(TaskEntity task);
 
     @Delete
@@ -36,6 +38,12 @@ public interface TaskDao {
     @Query("SELECT * FROM task_table WHERE status = :taskStatus ORDER BY created_at DESC")
     Flowable<List<TaskEntity>> getAllTasks(String taskStatus);
 
-    @Update(onConflict = OnConflictStrategy.REPLACE)
+    @Query("SELECT * FROM task_table WHERE id = :taskId")
+    Flowable<TaskEntity> getTask(String taskId);
+
+    @Update()
     int updateTask(TaskEntity updatedTask);
+
+    @Query("SELECT COUNT(*) FROM task_table")
+    int rowCount();
 }

@@ -19,8 +19,13 @@ import android.view.ViewParent;
 import com.example.awesometodolistapp.R;
 import com.example.awesometodolistapp.addTask.AddTaskDialog;
 import com.example.awesometodolistapp.common.Constants;
+import com.example.awesometodolistapp.data.common.DataConstants;
+import com.example.awesometodolistapp.data.common.DataUtils;
 import com.example.awesometodolistapp.data.models.Task;
+import com.example.awesometodolistapp.data.sources.local.database.RoomDb;
 import com.example.awesometodolistapp.data.sources.local.database.RoomTaskDataSource;
+import com.example.awesometodolistapp.data.sources.local.database.dao.TaskDao;
+import com.example.awesometodolistapp.data.sources.local.database.entities.TaskEntity;
 import com.example.awesometodolistapp.home.activeTasks.ActiveTasksFragment;
 import com.example.awesometodolistapp.home.completedTasks.CompletedTasksFragment;
 import com.example.awesometodolistapp.home.tasks.TasksFragment;
@@ -49,6 +54,30 @@ public class HomeActivity extends AppCompatActivity {
 
         fab = findViewById(R.id.fab);
         fab.setOnClickListener((it) -> notifyFragmentAboutFabClickEvent());
+//        mada();
+    }
+
+    private void mada() {
+
+        String taskId = "This is my unique id. gfgfd s";
+        String taskTitle = "Some title here";
+        String taskStatus = DataConstants.STATE_ACTIVE;
+
+        Task task = new Task(taskId, taskTitle, taskStatus);
+
+
+
+        RoomDb roomDb = RoomDb.getInstance(this);
+        TaskDao taskDao = roomDb.taskDao();
+
+        taskDao.insertTask(TaskEntity.create(task));
+        taskDao.getTask(taskId)
+                .subscribe(
+                        taskEntity -> {
+                            Log.d(TAG, taskEntity.getTaskId());
+                        }
+                );
+
     }
 
     /**

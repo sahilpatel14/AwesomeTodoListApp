@@ -4,6 +4,7 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import com.example.awesometodolistapp.data.common.DataConstants;
 import com.example.awesometodolistapp.data.common.DataUtils;
@@ -21,9 +22,14 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import io.reactivex.Flowable;
+import io.reactivex.Single;
+import io.reactivex.subscribers.TestSubscriber;
 
 /**
  * Created by sahil-mac on 17/05/18.
@@ -33,7 +39,7 @@ import io.reactivex.Flowable;
 public class SimpleEntityReadWriteTest {
 
     public static final String TASK_TITLE = "Test Title";
-    public static final String TASK_ID = DataUtils.generateRandomId();
+    public static final String TASK_ID = "bla bla bla";
 
     private static TaskEntity taskEntity;
 
@@ -55,73 +61,123 @@ public class SimpleEntityReadWriteTest {
     }
 
     @Test
+    public void rowCount_returnsNoOfRows_returnZero() {
+        assertThat(mTaskDao.rowCount(), is(0));
+    }
+
+    @Test
     public void insert_writeTaskEntity_returnLong() {
         Long response = mTaskDao.insertTask(taskEntity);
-        System.out.print(response);
         assertThat(response, is(1L));
     }
-//
+
+    @Test
+    public void getTask_getSavedTask_returnsTask() {
+
+        Long resp = mTaskDao.insertTask(taskEntity);
+        assertThat(resp, is(1L));
+
+        assertThat(mTaskDao.rowCount(), is(1));
+
+        Log.d("MyTest :", taskEntity.getTaskId());
+
+        Flowable<TaskEntity> response = mTaskDao.getTask(taskEntity.getTaskId());
+        TestSubscriber<TaskEntity> testSubscriber = new TestSubscriber<>();
+
+        response.subscribe(testSubscriber);
+        testSubscriber.assertNoErrors();
+        testSubscriber.assertValueCount(1);
+    }
+
+    @Test
+    public void rowCount_returnsNoOfRows_returnOne() {
+
+        mTaskDao.insertTask(taskEntity);
+
+        assertThat(mTaskDao.rowCount(), is(1));
+    }
+
+
+
 //    @Test(expected = IllegalArgumentException.class)
 //    public void insert_passNull_throwsException() {
 //        mTaskDao.insertTask(null);
 //    }
-//
+
 //    @Test
 //    public void getTasks_passNullStatusType_returnsEmptyList() {
-//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(null);
-//        response.subscribe(
-//                taskEntities -> assertEquals(taskEntities.size(), 0)
-//        );
-//    }
 //
+//        mTaskDao.insertTask(taskEntity);
+//        TestSubscriber<List<TaskEntity>> testSubscriber = new TestSubscriber<>();
+//
+//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(null);
+//        response.subscribe(testSubscriber);
+//
+//        testSubscriber.assertNoErrors();
+//        testSubscriber.assertEmpty();
+//    }
+
 //    @Test
 //    public void getTasks_passInvalidStatusType_returnsEmptyList() {
+//
+//
 //        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks("Invalid status");
-//        response.subscribe(
-//                taskEntities -> assertEquals(taskEntities.size(), 0),
-//                throwable -> {}
-//        );
+//        TestSubscriber<List<TaskEntity>> testTaskEntity = new TestSubscriber<>();
+//        response.subscribe(testTaskEntity);
+//
+//        testTaskEntity.assertNoErrors();
+//        testTaskEntity.assertEmpty();
 //    }
 //
 //
 //    @Test
 //    public void getTasks_passActiveStatusType_returnsOneItem() {
+//
+//        mTaskDao.insertTask(taskEntity);
+//        taskEntity.setTaskId("fdsfsd");
+////        mTaskDao.insertTask(taskEntity);
+//
+//        TestSubscriber<List<TaskEntity>> testTaskEntity = new TestSubscriber<>();
 //        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_ACTIVE);
-//        response.subscribe(
-//                taskEntities -> assertEquals(taskEntities.size(), 1),
-//                throwable -> {}
-//        );
+//        response.subscribe(testTaskEntity);
+//        testTaskEntity.assertNoErrors();
+//        testTaskEntity.assertValues(Collections.singletonList(taskEntity));
 //    }
 //
 //    @Test
 //    public void getTasks_passCompletedStatusType_returnsEmptyList() {
 //        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_COMPLETED);
 //        response.subscribe(
-//                taskEntities -> assertEquals(taskEntities.size(), 1),
+//                taskEntities -> {
+//                    System.out.print(taskEntities.get(0));
+//                    Log.d("Test My code : ", taskEntities.get(0).toString());
+//                    assertEquals(taskEntities.size(), 1);
+//                },
 //                throwable -> {}
 //        );
 //    }
-//
-//    @Test
+
+//    @Test(expected = IllegalArgumentException.class)
 //    public void updateTask_passNull_throwsException() {
 //        mTaskDao.updateTask(null);
 //    }
-//
+
 //    @Test
-//    public void updateTask_passSameEntityObject_returnsOne() {
+//    public void updateTask_passSameEntityObject_returnsZero() {
 //        int response = mTaskDao.updateTask(taskEntity);
-//        assertThat(response, is(1));
+//        //  No rows updated
+//        assertThat(response, is(0));
 //    }
-//
+
 //    @Test
-//    public void updateTask_passUpdatedEntityObject_returnsZero() {
+//    public void updateTask_passUpdatedEntityObject_returnsOne() {
 //        TaskEntity updatedTaskEntity = taskEntity;
 //        updatedTaskEntity.setTaskTitle("Updated task title");
 //
 //        int response = mTaskDao.updateTask(taskEntity);
-//        assertThat(response, is(0));
+//        assertThat(response, is(1));
 //    }
-//
+
 //    @Test
 //    public void updateTask_passNonExistentEntityObject_returnsZero() {
 //        TaskEntity notTaskEntity = taskEntity;
@@ -133,11 +189,11 @@ public class SimpleEntityReadWriteTest {
 //    }
 
 
-    @Test
-    public void deleteTask_passExistingEntityObject_returnsOne() {
-        int response = mTaskDao.deleteTask(taskEntity);
-        assertThat(response, is(1));
-    }
+//    @Test
+//    public void deleteTask_passExistingEntityObject_returnsOne() {
+//        int response = mTaskDao.deleteTask(taskEntity);
+//        assertThat(response, is(1));
+//    }
 
 //    @Test
 //    public void deleteTask_passingNonExistingEntityObject_returnsZero() {

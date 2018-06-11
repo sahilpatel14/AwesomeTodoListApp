@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import com.example.awesometodolistapp.data.repositories.TaskRepository;
 import com.example.awesometodolistapp.data.sources.TaskDataSource;
 import com.example.awesometodolistapp.data.sources.local.mockData.MockTaskDataSource;
+import com.example.awesometodolistapp.notifications.NotificationManager;
 
 /**
  * Created by sahil-mac on 13/05/18.
@@ -15,7 +16,7 @@ import com.example.awesometodolistapp.data.sources.local.mockData.MockTaskDataSo
 public final class Injection {
 
 
-    public static TaskRepository getTaskRepository(@NonNull Application application) {
+    public static TaskRepository getTaskRepository(@NonNull Context context ) {
         TaskDataSource taskDataSource = new MockTaskDataSource();
         return TaskRepository.getInstance(taskDataSource);
     }

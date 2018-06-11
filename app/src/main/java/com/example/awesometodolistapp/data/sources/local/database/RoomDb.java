@@ -22,7 +22,7 @@ public abstract class RoomDb extends RoomDatabase {
     private static RoomDb INSTANCE;
     private static final String DB_NAME = "task_database";
 
-    static RoomDb getInstance(final Context context) {
+    public static RoomDb getInstance(final Context context) {
         if (INSTANCE == null) {
 
             //  Making it thread safe
@@ -30,6 +30,7 @@ public abstract class RoomDb extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             RoomDb.class, DB_NAME)
+                            .allowMainThreadQueries()
                             .build();
                 }
             }
