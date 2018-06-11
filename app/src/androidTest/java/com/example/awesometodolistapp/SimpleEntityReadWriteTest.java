@@ -22,14 +22,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import io.reactivex.Flowable;
-import io.reactivex.Single;
+import io.reactivex.observers.BaseTestConsumer;
 import io.reactivex.subscribers.TestSubscriber;
+
 
 /**
  * Created by sahil-mac on 17/05/18.
@@ -46,17 +44,23 @@ public class SimpleEntityReadWriteTest {
     private TaskDao mTaskDao;
     private RoomDb mDb;
 
+    private TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
+    private TestSubscriber<TaskEntity> taskSubscriber = new TestSubscriber<>();
+
     @Before
     public void createDb() {
         Context context = InstrumentationRegistry.getTargetContext();
         mDb = Room.inMemoryDatabaseBuilder(context, RoomDb.class).build();
         mTaskDao = mDb.taskDao();
 
+        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
+        taskSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
+
         taskEntity = getTaskEntity();
     }
 
     @After
-    public void closeDb() throws Exception {
+    public void closeDb() {
         mDb.close();
     }
 
@@ -71,78 +75,46 @@ public class SimpleEntityReadWriteTest {
         assertThat(response, is(1L));
     }
 
-    @Test
-    public void getTask_getSavedTask_returnsTask() {
-
-        Long resp = mTaskDao.insertTask(taskEntity);
-        assertThat(resp, is(1L));
-
-        assertThat(mTaskDao.rowCount(), is(1));
-
-        Log.d("MyTest :", taskEntity.getTaskId());
-
-        Flowable<TaskEntity> response = mTaskDao.getTask(taskEntity.getTaskId());
-        TestSubscriber<TaskEntity> testSubscriber = new TestSubscriber<>();
-
-        response.subscribe(testSubscriber);
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertValueCount(1);
-    }
 
     @Test
-    public void rowCount_returnsNoOfRows_returnOne() {
-
+    public void getTasks_passNullStatusType_returnsEmptyList() {
         mTaskDao.insertTask(taskEntity);
 
-        assertThat(mTaskDao.rowCount(), is(1));
+        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(null);
+        response.subscribe(taskListSubscriber);
+
+        taskListSubscriber.assertTimeout();
+        taskListSubscriber.assertValueCount(0);
+        taskListSubscriber.assertNoErrors();
+    }
+
+    @Test
+    public void getTasks_passInvalidStatusType_returnsEmptyList() {
+        mTaskDao.insertTask(taskEntity);
+
+        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks("Invalid status");
+        response.subscribe(taskListSubscriber);
+
+        taskListSubscriber.assertTimeout();
+        taskListSubscriber.assertValueCount(0);
+        taskListSubscriber.assertNoErrors();
     }
 
 
+    @Test
+    public void getTasks_passActiveStatusType_returnsOneItem() {
+        mTaskDao.insertTask(taskEntity);
 
-//    @Test(expected = IllegalArgumentException.class)
-//    public void insert_passNull_throwsException() {
-//        mTaskDao.insertTask(null);
-//    }
+        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_ACTIVE);
+        TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
+        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
 
-//    @Test
-//    public void getTasks_passNullStatusType_returnsEmptyList() {
-//
-//        mTaskDao.insertTask(taskEntity);
-//        TestSubscriber<List<TaskEntity>> testSubscriber = new TestSubscriber<>();
-//
-//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(null);
-//        response.subscribe(testSubscriber);
-//
-//        testSubscriber.assertNoErrors();
-//        testSubscriber.assertEmpty();
-//    }
+        response.subscribe(taskListSubscriber);
 
-//    @Test
-//    public void getTasks_passInvalidStatusType_returnsEmptyList() {
-//
-//
-//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks("Invalid status");
-//        TestSubscriber<List<TaskEntity>> testTaskEntity = new TestSubscriber<>();
-//        response.subscribe(testTaskEntity);
-//
-//        testTaskEntity.assertNoErrors();
-//        testTaskEntity.assertEmpty();
-//    }
-//
-//
-//    @Test
-//    public void getTasks_passActiveStatusType_returnsOneItem() {
-//
-//        mTaskDao.insertTask(taskEntity);
-//        taskEntity.setTaskId("fdsfsd");
-////        mTaskDao.insertTask(taskEntity);
-//
-//        TestSubscriber<List<TaskEntity>> testTaskEntity = new TestSubscriber<>();
-//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_ACTIVE);
-//        response.subscribe(testTaskEntity);
-//        testTaskEntity.assertNoErrors();
-//        testTaskEntity.assertValues(Collections.singletonList(taskEntity));
-//    }
+        taskListSubscriber.assertTimeout();
+        taskListSubscriber.assertNoErrors();
+        taskListSubscriber.assertValueCount(1);
+    }
 //
 //    @Test
 //    public void getTasks_passCompletedStatusType_returnsEmptyList() {
