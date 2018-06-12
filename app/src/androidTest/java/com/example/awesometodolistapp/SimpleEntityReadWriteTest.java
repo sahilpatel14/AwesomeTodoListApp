@@ -1,5 +1,6 @@
 package com.example.awesometodolistapp;
 
+import android.arch.core.executor.testing.InstantTaskExecutorRule;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -18,11 +19,13 @@ import org.junit.After;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Flowable;
 import io.reactivex.observers.BaseTestConsumer;
@@ -43,20 +46,20 @@ public class SimpleEntityReadWriteTest {
     private TaskDao mTaskDao;
     private RoomDb mDb;
 
-    private TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
-    private TestSubscriber<TaskEntity> taskSubscriber = new TestSubscriber<>();
 
     @Before
     public void createDb() {
         Context context = InstrumentationRegistry.getTargetContext();
-        mDb = Room.inMemoryDatabaseBuilder(context, RoomDb.class).build();
+        mDb = Room.inMemoryDatabaseBuilder(context, RoomDb.class)
+                .allowMainThreadQueries()
+                .build();
         mTaskDao = mDb.taskDao();
-
-        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
-        taskSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
-
         taskEntity = getTaskEntity();
     }
+
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule =
+            new InstantTaskExecutorRule();
 
     @After
     public void closeDb() {
@@ -75,8 +78,25 @@ public class SimpleEntityReadWriteTest {
 //    }
 
     @Test
-    public void getTasks_passNullStatusType_returnsEmptyList() {
+    public void getTasks_passNullStatusType_returnsEmptyList()  {
+//        mTaskDao.insertTask(taskEntity);
+
+
+        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks("blob");
+        response.test()
+                .awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000)
+                .assertNoErrors()
+                .assertNoTimeout()
+                .assertNoValues();
+    }
+
+    @Test
+    public void getTasks_passInvalidStatusType_returnsEmptyList() {
         mTaskDao.insertTask(taskEntity);
+
+        TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
+        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
+
 
         Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(null);
         response.subscribe(taskListSubscriber);
@@ -86,41 +106,34 @@ public class SimpleEntityReadWriteTest {
         taskListSubscriber.assertNoErrors();
     }
 
-    @Test
-    public void getTasks_passInvalidStatusType_returnsEmptyList() {
-        mTaskDao.insertTask(taskEntity);
 
-        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks("Invalid status");
-        response.subscribe(taskListSubscriber);
-
-        taskListSubscriber.assertTimeout();
-        taskListSubscriber.assertValueCount(0);
-        taskListSubscriber.assertNoErrors();
-    }
-
-
-    @Test
-    public void getTasks_passActiveStatusType_returnsOneItem() {
-        mTaskDao.insertTask(taskEntity);
-
-        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_ACTIVE);
-        TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
-        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 5000);
-
-        response.subscribe(taskListSubscriber);
-
-        taskListSubscriber.assertTimeout();
-        taskListSubscriber.assertNoErrors();
-        taskListSubscriber.assertValueCount(1);
-    }
+//    @Test
+//    public void getTasks_passActiveStatusType_returnsOneItem() {
+//        mTaskDao.insertTask(taskEntity);
 //
+//        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_ACTIVE);
+//        TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
+//        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 1000);
+//
+//        response.subscribe(taskListSubscriber);
+//
+//        taskListSubscriber.assertTimeout();
+//        taskListSubscriber.assertNoErrors();
+//        taskListSubscriber.assertValueCount(1);
+//    }
+
 //    @Test
 //    public void getTasks_passCompletedStatusType_returnsEmptyList() {
 //        Flowable<List<TaskEntity>> response = mTaskDao.getAllTasks(DataConstants.STATE_COMPLETED);
-//        response.subscribe(
-//                taskEntities -> assertEquals(taskEntities.size(), 1),
-//                throwable -> {}
-//        );
+//
+//        TestSubscriber<List<TaskEntity>> taskListSubscriber = new TestSubscriber<>();
+//        taskListSubscriber.awaitCount(1, BaseTestConsumer.TestWaitStrategy.SLEEP_1MS, 3000);
+//
+//        response.subscribe(taskListSubscriber);
+//
+//        taskListSubscriber.assertTimeout();
+//        taskListSubscriber.assertNoErrors();
+//        taskListSubscriber.assertValueCount(0);
 //    }
 //
 //    @Test
@@ -133,7 +146,7 @@ public class SimpleEntityReadWriteTest {
 //        int response = mTaskDao.updateTask(taskEntity);
 //        assertThat(response, is(1));
 //    }
-//
+
 //    @Test
 //    public void updateTask_passUpdatedEntityObject_returnsZero() {
 //        TaskEntity updatedTaskEntity = taskEntity;
@@ -142,7 +155,7 @@ public class SimpleEntityReadWriteTest {
 //        int response = mTaskDao.updateTask(taskEntity);
 //        assertThat(response, is(0));
 //    }
-//
+
 //    @Test
 //    public void updateTask_passNonExistentEntityObject_returnsZero() {
 //        TaskEntity notTaskEntity = taskEntity;
